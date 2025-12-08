@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProjektAbroad - Certifikovaní čeští svářeči pro projekty v EU</title>
+    <meta name="description" content="Profesionální svářečské práce z České republiky. Certifikovaní svářeči pro projekty v Německu, Švýcarsku, Švédsku a celé EU. Rychlé nasazení, ověřená kvalita.">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --cyan: #00A6D6;
+            --black: #1A1A1A;
+            --dark-gray: #424242;
+            --medium-gray: #757575;
+            --light-gray: #E0E0E0;
+            --bg-gray: #F5F5F5;
+            --white: #FFFFFF;
+            --orange: #FF6B35;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+            color: var(--black);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--white);
+            padding: 1.5rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            height: 50px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--black);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--cyan);
+        }
+
+        .cta-nav {
+            background: var(--cyan);
+            color: var(--white) !important;
+            padding: 0.7rem 1.5rem;
+            border-radius: 5px;
+            font-weight: 600;
+        }
+
+        .cta-nav:hover {
+            background: #008BB5;
+            color: var(--white) !important;
+        }
+
+        /* Mobile menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: var(--black);
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 90px;
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, var(--bg-gray) 0%, var(--white) 100%);
+            text-align: center;
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero .highlight {
+            color: var(--cyan);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--medium-gray);
+            margin-bottom: 2.5rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            margin: 3rem 0;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--cyan);
+        }
+
+        .stat-label {
+            color: var(--medium-gray);
+            font-size: 1rem;
+        }
+
+        .cta-primary {
+            display: inline-block;
+            background: var(--cyan);
+            color: var(--white);
+            padding: 1rem 2.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            margin: 0.5rem;
+        }
+
+        .cta-primary:hover {
+            background: #008BB5;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,166,214,0.3);
+        }
+
+        .cta-secondary {
+            display: inline-block;
+            background: var(--white);
+            color: var(--cyan);
+            padding: 1rem 2.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            border: 2px solid var(--cyan);
+            transition: all 0.3s;
+            margin: 0.5rem;
+        }
+
+        .cta-secondary:hover {
+            background: var(--cyan);
+            color: var(--white);
+        }
+
+        /* Services Section */
+        .services {
+            padding: 5rem 2rem;
+            background: var(--white);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--medium-gray);
+            font-size: 1.2rem;
+            margin-bottom: 4rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .services-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 10px;
+            border: 2px solid var(--light-gray);
+            transition: all 0.3s;
+        }
+
+        .service-card:hover {
+            border-color: var(--cyan);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--black);
+        }
+
+        .service-card p {
+            color: var(--medium-gray);
+            margin-bottom: 1rem;
+        }
+
+        .service-card ul {
+            list-style: none;
+            color: var(--medium-gray);
+        }
+
+        .service-card ul li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .service-card ul li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--cyan);
+            font-weight: bold;
+        }
+
+        /* Process Section */
+        .process {
+            padding: 5rem 2rem;
+            background: var(--bg-gray);
+        }
+
+        .process-steps {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .step {
+            text-align: center;
+            position: relative;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: var(--cyan);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0 auto 1.5rem;
+        }
+
+        .step h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .step p {
+            color: var(--medium-gray);
+        }
+
+        /* About Section */
+        .about {
+            padding: 5rem 2rem;
+            background: var(--white);
+        }
+
+        .about-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-text p {
+            color: var(--medium-gray);
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .about-features {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .feature {
+            display: flex;
+            align-items: start;
+            gap: 1rem;
+        }
+
+        .feature-icon {
+            background: var(--cyan);
+            color: var(--white);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-weight: bold;
+        }
+
+        .feature-text h4 {
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .feature-text p {
+            color: var(--medium-gray);
+            font-size: 0.95rem;
+            margin: 0;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 5rem 2rem;
+            background: var(--bg-gray);
+        }
+
+        .contact-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .contact-item {
+            text-align: center;
+        }
+
+        .contact-item-icon {
+            font-size: 2rem;
+            color: var(--cyan);
+            margin-bottom: 1rem;
+        }
+
+        .contact-item h4 {
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .contact-item a {
+            color: var(--medium-gray);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-item a:hover {
+            color: var(--cyan);
+        }
+
+        .contact-form {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: grid;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            color: var(--black);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            padding: 0.8rem;
+            border: 2px solid var(--light-gray);
+            border-radius: 5px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--cyan);
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-submit {
+            background: var(--cyan);
+            color: var(--white);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .form-submit:hover {
+            background: #008BB5;
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-gray);
+            color: var(--white);
+            padding: 3rem 2rem 1.5rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 1rem;
+            color: var(--cyan);
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #CCCCCC;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a:hover {
+            color: var(--cyan);
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+            color: #CCCCCC;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--white);
+                flex-direction: column;
+                padding: 2rem;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .hero-stats {
+                gap: 2rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigace -->
+    <nav>
+        <div class="nav-container">
+            <img src="/logo.png" alt="ProjektAbroad Logo" class="logo">
+            <button class="mobile-menu-btn" onclick="toggleMenu()">☰</button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#sluzby">Služby</a></li>
+                <li><a href="#proces">Proces</a></li>
+                <li><a href="#o-nas">O nás</a></li>
+                <li><a href="#kontakt" class="cta-nav">Poptávka</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Sekce -->
+    <section class="hero" id="uvod">
+        <div class="hero-container">
+            <h1>Certifikovaní <span class="highlight">čeští svářeči</span><br>pro projekty v EU</h1>
+            <p>Profesionální svářečské práce připravené k nasazení v Německu, Švýcarsku, Švédsku a celé EU. Rychle, spolehlivě, certifikovaně.</p>
+            
+            <div class="hero-stats">
+                <div class="stat">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Certifikovaných svářečů</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">4+</div>
+                    <div class="stat-label">Let zkušeností</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">7-14</div>
+                    <div class="stat-label">Dní do nasazení</div>
+                </div>
+            </div>
+
+            <div>
+                <a href="#kontakt" class="cta-primary">Požadovat svářeče</a>
+                <a href="#sluzby" class="cta-secondary">Naše služby</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sekce Služby -->
+    <section class="services" id="sluzby">
+        <h2 class="section-title">Svářečské služby</h2>
+        <p class="section-subtitle">Specializované svářečské práce pro průmyslové, stavební a infrastrukturní projekty</p>
+        
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">🔥</div>
+                <h3>TIG svařování</h3>
+                <p>Precizní svařování nerezové oceli, hliníku a speciálních slitin</p>
+                <ul>
+                    <li>Certifikace EN ISO 9606</li>
+                    <li>Letecký a zdravotnický standard</li>
+                    <li>Specialista na tenké materiály</li>
+                    <li>Argon a helium procesy</li>
+                </ul>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">⚡</div>
+                <h3>MIG/MAG svařování</h3>
+                <p>Vysokoprodukční svařování konstrukční oceli a těžkého průmyslu</p>
+                <ul>
+                    <li>CO2 a smíšené plyny</li>
+                    <li>Stavební projekty</li>
+                    <li>Lodní stavby a offshore</li>
+                    <li>Automobilový průmysl</li>
+                </ul>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">🏗️</div>
+                <h3>Specializované svařování</h3>
+                <p>Expertní svářeči pro náročné aplikace a prostředí</p>
+                <ul>
+                    <li>Orbitální a potrubní svařování</li>
+                    <li>Podvodní svařování</li>
+                    <li>Svařování tlakových nádob</li>
+                    <li>Na místě i v dílnách</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sekce Proces -->
+    <section class="process" id="proces">
+        <h2 class="section-title">Jak to funguje</h2>
+        <p class="section-subtitle">Jednoduché, rychlé, profesionální nasazení</p>
+        
+        <div class="process-steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>Poptávka</h3>
+                <p>Sdělte nám požadavky projektu, časový harmonogram a certifikační požadavky</p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>Výběr</h3>
+                <p>Vybereme certifikované svářeče z naší sítě odpovídající vašim specifikacím</p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>Dokumentace</h3>
+                <p>Zajistíme veškeré papíry, certifikace a pracovní povolení</p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">4</div>
+                <h3>Nasazení</h3>
+                <p>Svářeči dorazí na místo do 7-14 dnů, připraveni k práci</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sekce O nás -->
+    <section class="about" id="o-nas">
+        <div class="about-container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>Proč ProjektAbroad</h2>
+                    <p>Založena v roce 2025, ProjektAbroad přináší více než 4 roky praktických zkušeností v evropském svářečském průmyslu. Náš zakladatel osobně pracoval jako svářeč v Německu, Švýcarsku a Švédsku.</p>
+                    <p>Rozumíme oběma stranám byznysu - standardům kvality, které klienti požadují, i profesionální podpoře, kterou svářeči potřebují k podání nejlepšího výkonu.</p>
+                </div>
+
+                <div class="about-features">
+                    <div class="feature">
+                        <div class="feature-icon">✓</div>
+                        <div class="feature-text">
+                            <h4>Certifikovaná kvalita</h4>
+                            <p>Všichni svářeči vlastní platné certifikace EN ISO 9606, AWS nebo DIN pro jejich specializace</p>
+                        </div>
+                    </div>
+
+                    <div class="feature">
+                        <div class="feature-icon">✓</div>
+                        <div class="feature-text">
+                            <h4>Rychlé nasazení</h4>
+                            <p>7-14 dní nasazení oproti 30+ dnů u velkých agentur. Jsme rychlí, když nás potřebujete</p>
+                        </div>
+                    </div>
+
+                    <div class="feature">
+                        <div class="feature-icon">✓</div>
+                        <div class="feature-text">
+                            <h4>Plná shoda</h4>
+                            <p>Zajišťujeme veškerou dokumentaci, pracovní povolení, pojištění a právní požadavky</p>
+                        </div>
+                    </div>
+
+                    <div class="feature">
+                        <div class="feature-icon">✓</div>
+                        <div class="feature-text">
+                            <h4>Specializované zaměření</h4>
+                            <p>Děláme jen svařování. Ne obecný staffing. Celá naše síť jsou sváření profesionálové</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sekce Kontakt -->
+    <section class="contact" id="kontakt">
+        <h2 class="section-title">Začněte</h2>
+        <p class="section-subtitle">Požádejte o certifikované svářeče pro váš další projekt</p>
+        
+        <div class="contact-container">
+            <div class="contact-info">
+                <div class="contact-item">
+                    <div class="contact-item-icon">📞</div>
+                    <h4>Telefon</h4>
+                    <a href="tel:+420720571885">+420 720 571 885</a>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-item-icon">✉️</div>
+                    <h4>Email</h4>
+                    <a href="mailto:info@projektabroad.com">info@projektabroad.com</a>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-item-icon">⏱️</div>
+                    <h4>Doba odezvy</h4>
+                    <p>Do 24 hodin</p>
+                </div>
+            </div>
+
+            <form class="contact-form" onsubmit="handleSubmit(event)">
+                <div class="form-group">
+                    <label for="company">Název společnosti *</label>
+                    <input type="text" id="company" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="name">Kontaktní osoba *</label>
+                    <input type="text" id="name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Telefon</label>
+                    <input type="tel" id="phone">
+                </div>
+
+                <div class="form-group">
+                    <label for="service">Typ svařování *</label>
+                    <select id="service" required>
+                        <option value="">Vyberte typ svařování</option>
+                        <option value="tig">TIG svařování</option>
+                        <option value="mig">MIG/MAG svařování</option>
+                        <option value="orbital">Orbitální/potrubní svařování</option>
+                        <option value="underwater">Podvodní svařování</option>
+                        <option value="multiple">Více typů</option>
+                        <option value="other">Jiné/Nejsem si jistý</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="welders">Počet potřebných svářečů</label>
+                    <input type="number" id="welders" min="1" placeholder="např. 5">
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Detaily projektu *</label>
+                    <textarea id="message" required placeholder="Povězte nám o vašem projektu: místo, časový harmonogram, potřebné certifikace atd."></textarea>
+                </div>
+
+                <button type="submit" class="form-submit">Odeslat poptávku</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h4>ProjektAbroad</h4>
+                <p>Profesionální svářečské práce spojující certifikované české svářeče s projekty v EU.</p>
+            </div>
+
+            <div class="footer-section">
+                <h4>Služby</h4>
+                <a href="#sluzby">TIG svařování</a>
+                <a href="#sluzby">MIG/MAG svařování</a>
+                <a href="#sluzby">Specializované svařování</a>
+            </div>
+
+            <div class="footer-section">
+                <h4>Společnost</h4>
+                <a href="#o-nas">O nás</a>
+                <a href="#proces">Jak to funguje</a>
+                <a href="#kontakt">Kontakt</a>
+            </div>
+
+            <div class="footer-section">
+                <h4>Kontakt</h4>
+                <p>📞 +420 720 571 885</p>
+                <p>✉️ info@projektabroad.com</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2025 ProjektAbroad. Všechna práva vyhrazena.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Close mobile menu if open
+                    document.getElementById('navLinks').classList.remove('active');
+                }
+            });
+        });
+
+        // Form submission
+        function handleSubmit(event) {
+            event.preventDefault();
+            
+            // Get form data
+            const formData = {
+                company: document.getElementById('company').value,
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                service: document.getElementById('service').value,
+                welders: document.getElementById('welders').value,
+                message: document.getElementById('message').value
+            };
+
+            // For now, show alert. Later integrate with email service
+            alert('Děkujeme za vaši poptávku! Budeme vás kontaktovat do 24 hodin.\n\nPro naléhavé požadavky prosím volejte: +420 720 571 885');
+            
+            // Reset form
+            event.target.reset();
+            
+            // TODO: Integrate with EmailJS, Formspree, or backend API
+            console.log('Form data:', formData);
+        }
+
+        // Add active nav link on scroll
+        window.addEventListener('scroll', () => {
+            let current = '';
+            const sections = document.querySelectorAll('section');
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
